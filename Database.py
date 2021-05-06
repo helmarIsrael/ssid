@@ -3,25 +3,28 @@ import pandas
 import os
 
 column_names = ["Student ID","Name","Year Level","Gender","Course"] #the columns of the csv
-filesize = os.path.getsize("student_database.csv") # checks if they file is empty
+filesize = os.path.getsize("student_database.csv") # checks if the file is empty
 if filesize == 0:
       with open("student_database.csv", mode="w") as student_database: #if file is empty, it will create the columns first
             student_list = csv.writer(student_database, delimiter=",")
             student_list.writerow(column_names)
 
+def cls():
+      print("\n" * 100)
+
 def view_student():                                                             #this function will show the list of students input by the user
-            df = pandas.read_csv("student_database.csv", 'r', delimiter = ",")
-            df.to_csv("student_database.csv", header= column_names, index= False)
-            df_csv = pandas.read_csv("student_database.csv")
-            print(df_csv)
-            input("Press enter to return to main menu...")
+      df = pandas.read_csv("student_database.csv", 'r', delimiter=",")
+      df.to_csv("student_database.csv", header=column_names, index=False)
+      df_csv = pandas.read_csv("student_database.csv")
+      print(df_csv)
+      input("Press enter to return to main menu...")
 
 
 def add_student():                                                              #this function will allow user to add students
-      with open("student_database.csv", mode= "a") as student_database:
+      with open("student_database.csv", mode="a") as student_database:
             student_list = csv.writer(student_database)
             df = pandas.read_csv("student_database.csv")
-            df.to_csv("student_database.csv", index= None, header= column_names)
+            df.to_csv("student_database.csv", index=None, header=column_names)
 
             print("Input student ID: ")
             id = input()
@@ -78,7 +81,6 @@ def edit_student():                                                     #this fu
                                                       print("Done.")
                                                       input("Press enter to return to main menu...")
                                                       break
-                                                      print(row)
                                                 elif value == 3:
                                                       print(row)
                                                       print("Apply a new gender: ")
@@ -165,14 +167,19 @@ while True:
 
       if selection == "1":
             view_student()
+            cls()
       elif selection == "2":
             add_student()
+            cls()
       elif selection == "3":
             edit_student()
+            cls()
       elif selection == "4":
             delete_student()
+            cls()
       elif selection == "5":
             find()
+            cls()
       elif selection == "6":
             exit()
       else:
